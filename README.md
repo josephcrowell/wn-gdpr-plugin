@@ -26,6 +26,17 @@ This plugin provides two simple components to make your Winter CMS installation 
 
 ### Quick start
 
+1. Add Winter CMS's Snowboard framework to every theme layout that uses the GDPR components:
+
+```twig
+{% snowboard all %}
+```
+
+Place this tag before any plugin or custom scripts that call `Snowboard`. The `all` option loads
+the AJAX request, HTML data-attribute handling, and extras modules. The base `{% snowboard %}`
+tag alone does not load these modules. Winter CMS already loads Snowboard in the backend;
+this step is required for your frontend theme layouts.
+
 1. Define your cookie groups and cookies via the backend settings page.
 You can also import a example preset by running `php artisan gdpr:import`
 1. Place the `cookieManager` component on a `cookies.htm` page
@@ -114,6 +125,7 @@ you can check for the user's consent and optionally include your resources.
 
 #### Installation
 
+1. Load Snowboard in your theme layouts with `{% snowboard all %}` as described in the [quick start](#quick-start).
 1. Define your cookie groups and cookies via the Backend settings
 1. Add the `cookieBanner` component to all your **layouts**.
 

@@ -1,22 +1,33 @@
 function initializeSorting () {
     if (typeof Sortable === 'undefined') return;
-    var $tbody = $('.drag-handle').parents('table.data tbody');
-    Sortable.create($tbody[0], {
+
+    var handle = document.querySelector('.drag-handle');
+    var tbody = handle ? handle.closest('table.data tbody') : null;
+    if (!tbody) return;
+
+    Sortable.create(tbody, {
         handle: '.drag-handle',
         animation: 150,
         onEnd: function (evt) {
-            var $inputs = $(evt.target).find('td>div.drag-handle>input');
-            var $form = $('<form style="display: none;">');
-            $form.append($inputs.clone())
-                .request('onReorderRelation', {
-                    complete: function () {
-                        $form.remove();
-                    }
-                });
+            var inputs = evt.from.querySelectorAll('td>div.drag-handle>input');
+            var form = document.createElement('form');
+            form.style.display = 'none';
+
+            inputs.forEach(function (input) {
+                form.appendChild(input.cloneNode(true));
+            });
+
+            Snowboard.request(form, 'onReorderRelation', {
+                complete: function () {
+                    form.remove();
+                }
+            });
         }
     });
 }
 
-$(function () {
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeSorting, { once: true });
+} else {
     initializeSorting();
-});
+}

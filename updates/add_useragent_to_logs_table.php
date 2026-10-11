@@ -1,6 +1,6 @@
-<?php namespace OFFLINE\GDPR\Updates;
+<?php namespace JosephCrowell\GDPR\Updates;
 
-use October\Rain\Database\Updates\Migration;
+use Winter\Storm\Database\Updates\Migration;
 use Schema;
 
 class AddUserAgentToLogsTable extends Migration

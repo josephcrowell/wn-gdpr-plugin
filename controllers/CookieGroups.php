@@ -1,10 +1,10 @@
-<?php namespace OFFLINE\GDPR\Controllers;
+<?php namespace JosephCrowell\GDPR\Controllers;
 
 use Backend\Behaviors\RelationController;
 use Backend\Classes\Controller;
 use BackendMenu;
 use Flash;
-use OFFLINE\GDPR\Models\CookieGroup;
+use JosephCrowell\GDPR\Models\CookieGroup;
 use System\Classes\SettingsManager;
 use Backend\Behaviors\ListController;
 use Backend\Behaviors\FormController;
@@ -25,17 +25,17 @@ class CookieGroups extends Controller
     public $relationConfig = 'config_relation.yaml';
 
     public $requiredPermissions = [
-        'offline.gdpr.manage_cookie_groups',
+        'josephcrowell.gdpr.manage_cookie_groups',
     ];
 
     public function __construct()
     {
         parent::__construct();
-        BackendMenu::setContext('October.System', 'system', 'settings');
-        SettingsManager::setContext('OFFLINE.GDPR', 'gdpr_cookies');
-        $this->addCss('/plugins/offline/gdpr/assets/backend/styles.css');
-        $this->addJs('/plugins/offline/gdpr/assets/backend/sortable.js');
-        $this->addJs('/plugins/offline/gdpr/assets/backend/backend.js');
+        BackendMenu::setContext('Winter.System', 'system', 'settings');
+        SettingsManager::setContext('JosephCrowell.GDPR', 'gdpr_cookies');
+        $this->addCss('/plugins/josephcrowell/gdpr/assets/backend/styles.css');
+        $this->addJs('/plugins/josephcrowell/gdpr/assets/backend/sortable.js');
+        $this->addJs('/plugins/josephcrowell/gdpr/assets/backend/backend.js');
     }
 
     public function onReorderRelation()
@@ -45,6 +45,6 @@ class CookieGroups extends Controller
 
         $model->setRelationOrder('cookies', $records, range(1, count($records)));
 
-        Flash::success(trans('offline.gdpr::lang.common.sorted'));
+        Flash::success(trans('josephcrowell.gdpr::lang.common.sorted'));
     }
 }

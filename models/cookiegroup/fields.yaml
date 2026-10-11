@@ -1,17 +1,17 @@
 fields:
     name:
-        label: 'offline.gdpr::lang.cookie_group.fields.name'
+        label: 'josephcrowell.gdpr::lang.cookie_group.fields.name'
         span: left
         type: text
     required:
-        label: 'offline.gdpr::lang.cookie_group.fields.required'
+        label: 'josephcrowell.gdpr::lang.cookie_group.fields.required'
         span: right
         type: switch
         default: 0
-        comment: 'offline.gdpr::lang.cookie_group.fields.required_comment'
+        comment: 'josephcrowell.gdpr::lang.cookie_group.fields.required_comment'
     description:
-        label: 'offline.gdpr::lang.cookie.fields.purpose'
-        commentAbove: 'offline.gdpr::lang.cookie.fields.purpose_comment'
+        label: 'josephcrowell.gdpr::lang.cookie.fields.purpose'
+        commentAbove: 'josephcrowell.gdpr::lang.cookie.fields.purpose_comment'
         size: large
         span: full
         type: richeditor
@@ -21,5 +21,5 @@ tabs:
             span: full
             type: partial
             path: cookies
-            tab: 'offline.gdpr::lang.settings.cookies.label'
+            tab: 'josephcrowell.gdpr::lang.settings.cookies.label'
             context: update

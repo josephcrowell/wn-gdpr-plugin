@@ -1,7 +1,16 @@
-# oc-gdpr-plugin
-October CMS plugin to make websites GDPR compliant.
+# Winter GDPR
+Winter CMS plugin to make websites GDPR compliant.
 
-This plugin is available on the October Marketplace: https://octobercms.com/plugin/offline-gdpr
+This is a Winter CMS fork of [OFFLINE's October CMS GDPR plugin](https://github.com/OFFLINE-GmbH/oc-gdpr-plugin).
+The Composer package `josephcrowell/wn-gdpr-plugin` replaces `offline/oc-gdpr-plugin`.
+
+The plugin uses the `JosephCrowell.GDPR` identifier and `josephcrowell.gdpr::` resource namespace.
+Winter's plugin replacement mapping provides compatibility aliases for `OFFLINE.GDPR`.
+Version 2.2.31 renames the three GDPR database tables and saved-settings keys from `offline_gdpr_*` to `josephcrowell_gdpr_*`, preserving their records and values. Run `php artisan winter:up` from your Winter CMS root before using the updated plugin. Historical migrations retain the upstream names; fresh installations run those migrations before the rename.
+The rename migration refuses to overwrite existing destination tables or settings keys. Resolve any reported source/destination conflicts before retrying the upgrade. Its rollback restores the upstream names.
+Translated model types and model-specific retention settings retain their upstream identifiers to preserve existing data.
+Permission codes use the `josephcrowell.gdpr.*` namespace. Existing backend users and roles granted `offline.gdpr.*` permissions must be reassigned the corresponding new permissions.
+The upstream cleanup registration event remains supported for existing integrations.
 
 ## Features
 
@@ -10,7 +19,7 @@ This plugin is available on the October Marketplace: https://octobercms.com/plug
 
 ## Cookie Consent Manager
 
-This plugin provides two simple components to make your October installation GDPR compliant.
+This plugin provides two simple components to make your Winter CMS installation GDPR compliant.
 
 ![cookie-manager](https://user-images.githubusercontent.com/8600029/41364223-5c58a548-6f36-11e8-9279-2e04217fe645.gif)
 
@@ -72,7 +81,7 @@ It is possible to define your cookie groups and cookies in a `yaml` file and imp
 This allows you to define cookies once and re-use them between installations.
 
 ```
-php artisan gdpr:import --path=plugins/offline/gdpr/assets/presets/example_en.yaml --replace
+php artisan gdpr:import --path=plugins/josephcrowell/gdpr/assets/presets/example_en.yaml --replace
 ```
 
 You can find example definitions in the [`assets/presets`](./assets/presets) directory of this plugin.
@@ -81,8 +90,8 @@ You can optionally use the `--replace` flag to remove all existing cookie data a
 
 If no path is specified, the plugin will load all presets from the configured `presets_path` and ask you which preset to import.
 
-You can change the path where presets are loaded from by changing the `offline.gdpr::config.presets_path` config entry.
-To do this, create the file `config/offline/gdpr/config.php` and return your custom path:
+You can change the path where presets are loaded from by changing the `josephcrowell.gdpr::config.presets_path` config entry.
+To do this, create the file `config/josephcrowell/gdpr/config.php` and return your custom path:
 
 ```php
 <?php
@@ -98,7 +107,7 @@ return [
 
 
 The `cookieBanner` component displays a cookie banner on the first page view. There the user has the possibility to 
-enable and disable cookies that your website uses (defined via October's backend settings).
+enable and disable cookies that your website uses (defined via Winter's backend settings).
 
 These settings are stored and made available in your partials using the `gdprCookieAllowed` helper. With this helper 
 you can check for the user's consent and optionally include your resources.
@@ -174,18 +183,18 @@ user did not interact with the `cookieBanner` (silent opt-in).
 
 The data retention functionality enables you to delete old plugin data after a specified amount of days.
 
-You can specify the data retention policy for each plugin via October's backend settings.
+You can specify the data retention policy for each plugin via Winter's backend settings.
 
-> **Important**: To automatically delete old data [make sure you have set up the Task Scheduler](http://octobercms.com/docs/setup/installation#crontab-setup) correctly.
+> **Important**: To automatically delete old data [make sure you have set up the Task Scheduler](https://wintercms.com/docs/v1.2/docs/setup/installation#setting-up-the-scheduler) correctly.
 
 ### Register your plugin
 
-To register your plugin you have to listen for the `offline.gdpr::cleanup.register` event in your Plugin's boot method.
+To register your plugin you have to listen for the `josephcrowell.gdpr::cleanup.register` event in your Plugin's boot method.
 
 ```php
     public function boot()
     {
-        \Event::listen('offline.gdpr::cleanup.register', function () {
+        \Event::listen('josephcrowell.gdpr::cleanup.register', function () {
             return [
                 'id'     => 'your-contact-form-plugin',
                 'label'  => 'Custom Contact Form Plugin',
@@ -257,4 +266,3 @@ Make sure to use an `each/delete` loop if your model makes use of `deleting/dele
 You can trigger the cleanup on demand via 
 
 > php artisan gdpr:cleanup
-

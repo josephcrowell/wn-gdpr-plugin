@@ -1,10 +1,10 @@
-<?php namespace OFFLINE\GDPR\Components;
+<?php namespace JosephCrowell\GDPR\Components;
 
 use Cms\Classes\ComponentBase;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
-use OFFLINE\GDPR\Classes\Cookies\ConsentCookie;
-use OFFLINE\GDPR\Models\CookieGroup;
+use JosephCrowell\GDPR\Classes\Cookies\ConsentCookie;
+use JosephCrowell\GDPR\Models\CookieGroup;
 
 class CookieManager extends ComponentBase
 {
@@ -18,7 +18,7 @@ class CookieManager extends ComponentBase
     {
         return [
             'name'        => 'Cookie Manager',
-            'description' => 'offline.gdpr::lang.cookie_manager.description',
+            'description' => 'josephcrowell.gdpr::lang.cookie_manager.description',
         ];
     }
 
@@ -26,20 +26,20 @@ class CookieManager extends ComponentBase
     {
         return [
             'include_css' => [
-                'title'       => 'offline.gdpr::lang.cookie_banner.include_css.title',
-                'description' => 'offline.gdpr::lang.cookie_banner.include_css.description',
+                'title'       => 'josephcrowell.gdpr::lang.cookie_banner.include_css.title',
+                'description' => 'josephcrowell.gdpr::lang.cookie_banner.include_css.description',
                 'default'     => 1,
                 'type'        => 'checkbox',
             ],
             'include_js'  => [
-                'title'       => 'offline.gdpr::lang.cookie_banner.include_js.title',
-                'description' => 'offline.gdpr::lang.cookie_banner.include_js.description',
+                'title'       => 'josephcrowell.gdpr::lang.cookie_banner.include_js.title',
+                'description' => 'josephcrowell.gdpr::lang.cookie_banner.include_js.description',
                 'default'     => 1,
                 'type'        => 'checkbox',
             ],
             'deferred' => [
-                'title'       => 'offline.gdpr::lang.cookie_banner.deferred.title',
-                'description' => 'offline.gdpr::lang.cookie_banner.deferred.description',
+                'title'       => 'josephcrowell.gdpr::lang.cookie_banner.deferred.title',
+                'description' => 'josephcrowell.gdpr::lang.cookie_banner.deferred.description',
                 'default'     => 0,
                 'type'        => 'checkbox',
             ]

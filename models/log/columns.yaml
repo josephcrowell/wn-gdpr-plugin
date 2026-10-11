@@ -4,18 +4,18 @@ columns:
         type: number
         invisible: true
     session_id:
-        label: 'offline.gdpr::lang.log.session_id'
+        label: 'josephcrowell.gdpr::lang.log.session_id'
         type: text
     decision:
-        label: 'offline.gdpr::lang.log.decision'
+        label: 'josephcrowell.gdpr::lang.log.decision'
         type: partial
-        path: $/offline/gdpr/models/log/_decision.htm
+        path: $/josephcrowell/gdpr/models/log/_decision.htm
     useragent:
         label: Useragent
         type: text
     created_at:
-        label: 'offline.gdpr::lang.log.visited'
+        label: 'josephcrowell.gdpr::lang.log.visited'
         type: datetime
     updated_at:
-        label: 'offline.gdpr::lang.log.decided'
+        label: 'josephcrowell.gdpr::lang.log.decided'
         type: datetime

@@ -1,29 +1,31 @@
 plugin:
-    name: 'offline.gdpr::lang.plugin.name'
-    description: 'offline.gdpr::lang.plugin.description'
-    author: OFFLINE
+    name: Winter GDPR
+    description: 'josephcrowell.gdpr::lang.plugin.description'
+    author: Joseph Crowell
     icon: icon-gavel
-    homepage: 'https://github.com/OFFLINE-GmbH/oc-gdpr-plugin'
+    homepage: 'https://github.com/josephcrowell/wn-gdpr-plugin'
+    replaces:
+        OFFLINE.GDPR: '*'
 permissions:
-    offline.gdpr.manage_cookie_consent:
-        tab: 'offline.gdpr::lang.plugin.name'
-        label: 'offline.gdpr::lang.permissions.manage_cookie_consent'
-    offline.gdpr.manage_data_retention:
-        tab: 'offline.gdpr::lang.plugin.name'
-        label: 'offline.gdpr::lang.permissions.manage_data_retention'
-    offline.gdpr.manage_cookie_groups:
-        tab: 'offline.gdpr::lang.plugin.name'
-        label: 'offline.gdpr::lang.permissions.manage_cookie_groups'
-    offline.gdpr.manage_cookie_info:
-        tab: 'offline.gdpr::lang.plugin.name'
-        label: 'offline.gdpr::lang.permissions.manage_cookie_info'
-    offline.gdpr.manage_logs:
-        tab: 'offline.gdpr::lang.plugin.name'
-        label: 'offline.gdpr::lang.permissions.manage_logs'
+    josephcrowell.gdpr.manage_cookie_consent:
+        tab: 'josephcrowell.gdpr::lang.plugin.name'
+        label: 'josephcrowell.gdpr::lang.permissions.manage_cookie_consent'
+    josephcrowell.gdpr.manage_data_retention:
+        tab: 'josephcrowell.gdpr::lang.plugin.name'
+        label: 'josephcrowell.gdpr::lang.permissions.manage_data_retention'
+    josephcrowell.gdpr.manage_cookie_groups:
+        tab: 'josephcrowell.gdpr::lang.plugin.name'
+        label: 'josephcrowell.gdpr::lang.permissions.manage_cookie_groups'
+    josephcrowell.gdpr.manage_cookie_info:
+        tab: 'josephcrowell.gdpr::lang.plugin.name'
+        label: 'josephcrowell.gdpr::lang.permissions.manage_cookie_info'
+    josephcrowell.gdpr.manage_logs:
+        tab: 'josephcrowell.gdpr::lang.plugin.name'
+        label: 'josephcrowell.gdpr::lang.permissions.manage_logs'
 navigation:
     main-menu-item:
         label: Cookies
-        url: offline/gdpr/logs
+        url: josephcrowell/gdpr/logs
         icon: icon-question
         permissions:
-            - offline.gdpr.manage_logs
+            - josephcrowell.gdpr.manage_logs

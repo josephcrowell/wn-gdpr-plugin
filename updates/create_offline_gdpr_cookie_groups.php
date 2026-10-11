@@ -1,7 +1,7 @@
-<?php namespace OFFLINE\GDPR\Updates;
+<?php namespace JosephCrowell\GDPR\Updates;
 
 use Schema;
-use October\Rain\Database\Updates\Migration;
+use Winter\Storm\Database\Updates\Migration;
 
 class CreateOfflineGdprCookieGroups extends Migration
 {

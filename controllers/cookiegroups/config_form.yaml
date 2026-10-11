@@ -1,11 +1,11 @@
 name: CookieGroups
-modelClass: OFFLINE\GDPR\Models\CookieGroup
-form: $/offline/gdpr/models/cookiegroup/fields.yaml
-defaultRedirect: offline/gdpr/cookiegroups
+modelClass: JosephCrowell\GDPR\Models\CookieGroup
+form: $/josephcrowell/gdpr/models/cookiegroup/fields.yaml
+defaultRedirect: josephcrowell/gdpr/cookiegroups
 create:
-    redirect: 'offline/gdpr/cookiegroups/update/:id'
-    redirectClose: offline/gdpr/cookiegroups
+    redirect: 'josephcrowell/gdpr/cookiegroups/update/:id'
+    redirectClose: josephcrowell/gdpr/cookiegroups
 update:
-    redirect: offline/gdpr/cookiegroups
-    redirectClose: offline/gdpr/cookiegroups
+    redirect: josephcrowell/gdpr/cookiegroups
+    redirectClose: josephcrowell/gdpr/cookiegroups
 preview: {  }

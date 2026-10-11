@@ -1,11 +1,11 @@
-<?php namespace OFFLINE\GDPR\Console;
+<?php namespace JosephCrowell\GDPR\Console;
 
 use DB;
 use Illuminate\Console\Command;
-use October\Rain\Parse\Yaml;
-use October\Rain\Support\Collection;
-use OFFLINE\GDPR\Models\Cookie;
-use OFFLINE\GDPR\Models\CookieGroup;
+use Winter\Storm\Parse\Yaml;
+use Winter\Storm\Support\Collection;
+use JosephCrowell\GDPR\Models\Cookie;
+use JosephCrowell\GDPR\Models\CookieGroup;
 use Symfony\Component\Console\Input\InputOption;
 
 class ImportPresets extends Command
@@ -20,8 +20,8 @@ class ImportPresets extends Command
             if ( ! $this->confirm('All existing cookie data will be removed. Do you want to continue?')) {
                 return;
             }
-            DB::table('offline_gdpr_cookie_groups')->truncate();
-            DB::table('offline_gdpr_cookies')->truncate();
+            DB::table('josephcrowell_gdpr_cookie_groups')->truncate();
+            DB::table('josephcrowell_gdpr_cookies')->truncate();
         }
 
         if ($path = $this->option('path')) {
@@ -70,7 +70,7 @@ class ImportPresets extends Command
 
     protected function getImportData()
     {
-        $path = config('offline.gdpr::config.presets_path');
+        $path = config('josephcrowell.gdpr::config.presets_path');
         if ( ! is_dir($path)) {
             $this->error(sprintf('Configured path is not a directory: %s', $path));
 

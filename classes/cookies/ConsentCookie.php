@@ -1,12 +1,12 @@
 <?php
 
-namespace OFFLINE\GDPR\Classes\Cookies;
+namespace JosephCrowell\GDPR\Classes\Cookies;
 
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Request;
-use OFFLINE\GDPR\Models\CookieGroup;
-use OFFLINE\GDPR\Models\GDPRSettings;
-use OFFLINE\GDPR\Models\Log;
+use JosephCrowell\GDPR\Models\CookieGroup;
+use JosephCrowell\GDPR\Models\GDPRSettings;
+use JosephCrowell\GDPR\Models\Log;
 use Session;
 
 class ConsentCookie

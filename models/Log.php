@@ -1,13 +1,13 @@
-<?php namespace OFFLINE\GDPR\Models;
+<?php namespace JosephCrowell\GDPR\Models;
 
 use Carbon\Carbon;
 use Model;
 
 class Log extends Model
 {
-    use \October\Rain\Database\Traits\Validation;
+    use \Winter\Storm\Database\Traits\Validation;
 
-    public $table = 'offline_gdpr_logs';
+    public $table = 'josephcrowell_gdpr_logs';
 
     const UNDECIDED = 'undecided';
     const ACCEPTED = 'accepted';
@@ -33,7 +33,7 @@ class Log extends Model
                 }
             } catch (\Throwable $e) {
                 logger()->error(
-                    '[OFFLINE.GDPR] preg_match on user agent failed.',
+                    '[JosephCrowell.GDPR] preg_match on user agent failed.',
                     ['regex' => $regex, 'ua' => $this->useragent, 'e' => $e]
                 );
             }

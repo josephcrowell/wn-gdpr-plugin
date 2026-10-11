@@ -1,9 +1,9 @@
 <?php
 
-namespace OFFLINE\GDPR\Classes\Traits;
+namespace JosephCrowell\GDPR\Classes\Traits;
 
 use Illuminate\Support\Facades\DB;
-use RainLab\Translate\Models\Attribute;
+use Winter\Translate\Models\Attribute;
 
 /**
  * @see https://github.com/rainlab/translate-plugin/issues/209#issuecomment-362088300
@@ -26,7 +26,7 @@ trait TranslatableRelation
 
             $obj = Attribute::where('locale', $key)
                      ->where('model_id', $this->id)
-                     ->where('model_type', get_class($this));
+                     ->where('model_type', $this->getMorphClass());
 
             if ($obj->count() > 0) {
                 $obj->update(['attribute_data' => $data->toJson()]);
@@ -36,7 +36,7 @@ trait TranslatableRelation
             Attribute::create([
                 'locale'         => $key,
                 'model_id'       => $this->id,
-                'model_type'     => get_class($this),
+                'model_type'     => $this->getMorphClass(),
                 'attribute_data' => $data->toJson(),
             ]);
         }

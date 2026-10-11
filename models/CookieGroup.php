@@ -1,19 +1,19 @@
-<?php namespace OFFLINE\GDPR\Models;
+<?php namespace JosephCrowell\GDPR\Models;
 
 use Model;
-use October\Rain\Database\Traits\Sluggable;
-use October\Rain\Database\Traits\Sortable;
-use OFFLINE\GDPR\Classes\Traits\SortableRelation;
+use Winter\Storm\Database\Traits\Sluggable;
+use Winter\Storm\Database\Traits\Sortable;
+use JosephCrowell\GDPR\Classes\Traits\SortableRelation;
 
 class CookieGroup extends Model
 {
-    use \October\Rain\Database\Traits\Validation;
+    use \Winter\Storm\Database\Traits\Validation;
     use Sluggable;
     use Sortable;
     use SortableRelation;
 
-    public $table = 'offline_gdpr_cookie_groups';
-    public $implement = ['@RainLab.Translate.Behaviors.TranslatableModel'];
+    public $table = 'josephcrowell_gdpr_cookie_groups';
+    public $implement = ['@Winter.Translate.Behaviors.TranslatableModel'];
     public $translatable = ['name', 'description'];
     public $fillable = [
         'sort_order',
@@ -35,7 +35,13 @@ class CookieGroup extends Model
             'key'      => 'cookie_group_id',
             'otherKey' => 'id',
             'order'    => 'sort_order',
-            'table'    => 'offline_gdpr_cookies',
+            'table'    => 'josephcrowell_gdpr_cookies',
         ],
     ];
+
+    public function getMorphClass()
+    {
+        // Preserve the model type used by existing translated cookie groups.
+        return 'OFFLINE\\GDPR\\Models\\CookieGroup';
+    }
 }

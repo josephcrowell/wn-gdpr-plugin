@@ -1,6 +1,6 @@
 <?php
 
-namespace OFFLINE\GDPR\Classes\Traits;
+namespace JosephCrowell\GDPR\Classes\Traits;
 
 use DB;
 use Exception;

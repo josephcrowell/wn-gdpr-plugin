@@ -1,7 +1,7 @@
-<?php namespace OFFLINE\GDPR\Console;
+<?php namespace JosephCrowell\GDPR\Console;
 
 use Illuminate\Console\Command;
-use OFFLINE\GDPR\Classes\Cleanup\CleanupService;
+use JosephCrowell\GDPR\Classes\Cleanup\CleanupService;
 
 class CleanUp extends Command
 {

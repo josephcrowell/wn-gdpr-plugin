@@ -1,96 +1,96 @@
 fields:
     must_consent:
-        label: 'offline.gdpr::lang.settings.cookie_consent.must_consent.label'
+        label: 'josephcrowell.gdpr::lang.settings.cookie_consent.must_consent.label'
         span: auto
         default: 0
         type: switch
-        comment: 'offline.gdpr::lang.settings.cookie_consent.must_consent.comment'
+        comment: 'josephcrowell.gdpr::lang.settings.cookie_consent.must_consent.comment'
     default_application_state:
-        label: 'offline.gdpr::lang.settings.cookie_consent.default_application_state.label'
-        comment: 'offline.gdpr::lang.settings.cookie_consent.default_application_state.comment'
+        label: 'josephcrowell.gdpr::lang.settings.cookie_consent.default_application_state.label'
+        comment: 'josephcrowell.gdpr::lang.settings.cookie_consent.default_application_state.comment'
         span: auto
         default: 0
         type: switch
 tabs:
     fields:
         lang:
-            label: 'offline.gdpr::lang.settings.cookie_consent.lang.label'
+            label: 'josephcrowell.gdpr::lang.settings.cookie_consent.lang.label'
             span: auto
             default: en
             type: text
-            comment: 'offline.gdpr::lang.settings.cookie_consent.lang.comment'
-            tab: 'offline.gdpr::lang.settings.cookie_consent.tabs.general'
+            comment: 'josephcrowell.gdpr::lang.settings.cookie_consent.lang.comment'
+            tab: 'josephcrowell.gdpr::lang.settings.cookie_consent.tabs.general'
         cookie_expires_after_days:
-            label: 'offline.gdpr::lang.settings.cookie_consent.cookie_expires_after_days.label'
+            label: 'josephcrowell.gdpr::lang.settings.cookie_consent.cookie_expires_after_days.label'
             span: auto
             type: number
-            comment: 'offline.gdpr::lang.settings.cookie_consent.cookie_expires_after_days.comment'
-            tab: 'offline.gdpr::lang.settings.cookie_consent.tabs.general'
+            comment: 'josephcrowell.gdpr::lang.settings.cookie_consent.cookie_expires_after_days.comment'
+            tab: 'josephcrowell.gdpr::lang.settings.cookie_consent.tabs.general'
         privacy_policy:
-            label: 'offline.gdpr::lang.settings.cookie_consent.privacy_policy.label'
+            label: 'josephcrowell.gdpr::lang.settings.cookie_consent.privacy_policy.label'
             span: auto
             type: text
-            comment: 'offline.gdpr::lang.settings.cookie_consent.privacy_policy.comment'
-            tab: 'offline.gdpr::lang.settings.cookie_consent.tabs.general'
+            comment: 'josephcrowell.gdpr::lang.settings.cookie_consent.privacy_policy.comment'
+            tab: 'josephcrowell.gdpr::lang.settings.cookie_consent.tabs.general'
         apps:
             prompt: 'Add new item'
             span: full
             type: repeater
-            tab: 'offline.gdpr::lang.settings.cookie_consent.tabs.apps'
+            tab: 'josephcrowell.gdpr::lang.settings.cookie_consent.tabs.apps'
             form:
                 fields:
                     name:
-                        label: 'offline.gdpr::lang.settings.cookie_consent.apps.repeater.name.label'
-                        comment: 'offline.gdpr::lang.settings.cookie_consent.apps.repeater.name.comment'
+                        label: 'josephcrowell.gdpr::lang.settings.cookie_consent.apps.repeater.name.label'
+                        comment: 'josephcrowell.gdpr::lang.settings.cookie_consent.apps.repeater.name.comment'
                         span: left
                         type: text
                     application_state:
-                        label: 'offline.gdpr::lang.settings.cookie_consent.apps.repeater.application_state.label'
+                        label: 'josephcrowell.gdpr::lang.settings.cookie_consent.apps.repeater.application_state.label'
                         span: right
                         default: 0
                         type: checkbox
-                        comment: 'offline.gdpr::lang.settings.cookie_consent.apps.repeater.application_state.comment'
+                        comment: 'josephcrowell.gdpr::lang.settings.cookie_consent.apps.repeater.application_state.comment'
                     required:
-                        label: 'offline.gdpr::lang.settings.cookie_consent.apps.repeater.required.label'
+                        label: 'josephcrowell.gdpr::lang.settings.cookie_consent.apps.repeater.required.label'
                         span: right
                         default: 0
                         type: checkbox
-                        comment: 'offline.gdpr::lang.settings.cookie_consent.apps.repeater.required.comment'
+                        comment: 'josephcrowell.gdpr::lang.settings.cookie_consent.apps.repeater.required.comment'
                     title:
-                        label: 'offline.gdpr::lang.settings.cookie_consent.apps.repeater.title.label'
-                        comment: 'offline.gdpr::lang.settings.cookie_consent.apps.repeater.title.comment'
+                        label: 'josephcrowell.gdpr::lang.settings.cookie_consent.apps.repeater.title.label'
+                        comment: 'josephcrowell.gdpr::lang.settings.cookie_consent.apps.repeater.title.comment'
                         span: left
                         type: text
                     opt_out:
-                        label: 'offline.gdpr::lang.settings.cookie_consent.apps.repeater.opt_out.label'
+                        label: 'josephcrowell.gdpr::lang.settings.cookie_consent.apps.repeater.opt_out.label'
                         span: right
                         default: 0
                         type: checkbox
-                        comment: 'offline.gdpr::lang.settings.cookie_consent.apps.repeater.opt_out.comment'
+                        comment: 'josephcrowell.gdpr::lang.settings.cookie_consent.apps.repeater.opt_out.comment'
                     only_once:
-                        label: 'offline.gdpr::lang.settings.cookie_consent.apps.repeater.only_once.label'
+                        label: 'josephcrowell.gdpr::lang.settings.cookie_consent.apps.repeater.only_once.label'
                         span: right
                         default: 0
                         type: checkbox
-                        comment: 'offline.gdpr::lang.settings.cookie_consent.apps.repeater.only_once.comment'
+                        comment: 'josephcrowell.gdpr::lang.settings.cookie_consent.apps.repeater.only_once.comment'
                     purposes:
-                        label: 'offline.gdpr::lang.settings.cookie_consent.apps.repeater.purposes.label'
-                        comment: 'offline.gdpr::lang.settings.cookie_consent.apps.repeater.purposes.comment'
+                        label: 'josephcrowell.gdpr::lang.settings.cookie_consent.apps.repeater.purposes.label'
+                        comment: 'josephcrowell.gdpr::lang.settings.cookie_consent.apps.repeater.purposes.comment'
                         span: left
                         type: taglist
                         separator: comma
                         mode: array
                     callback:
-                        label: 'offline.gdpr::lang.settings.cookie_consent.apps.repeater.callback.label'
+                        label: 'josephcrowell.gdpr::lang.settings.cookie_consent.apps.repeater.callback.label'
                         size: small
                         language: javascript
                         span: right
                         type: codeeditor
-                        comment: 'offline.gdpr::lang.settings.cookie_consent.apps.repeater.callback.comment'
+                        comment: 'josephcrowell.gdpr::lang.settings.cookie_consent.apps.repeater.callback.comment'
                         commentHtml: 1
                     cookies:
-                        label: 'offline.gdpr::lang.settings.cookie_consent.apps.repeater.cookies.label'
-                        comment: 'offline.gdpr::lang.settings.cookie_consent.apps.repeater.cookies.comment'
+                        label: 'josephcrowell.gdpr::lang.settings.cookie_consent.apps.repeater.cookies.label'
+                        comment: 'josephcrowell.gdpr::lang.settings.cookie_consent.apps.repeater.cookies.comment'
                         span: left
                         type: taglist
                         separator: comma
@@ -99,15 +99,15 @@ tabs:
             prompt: 'Add new item'
             span: full
             type: repeater
-            tab: 'offline.gdpr::lang.settings.cookie_consent.tabs.translations'
+            tab: 'josephcrowell.gdpr::lang.settings.cookie_consent.tabs.translations'
             form:
                 fields:
                     code:
-                        label: 'offline.gdpr::lang.settings.cookie_consent.translations.repeater.code.label'
+                        label: 'josephcrowell.gdpr::lang.settings.cookie_consent.translations.repeater.code.label'
                         span: full
                         type: text
                     json:
-                        label: 'offline.gdpr::lang.settings.cookie_consent.translations.repeater.json.label'
+                        label: 'josephcrowell.gdpr::lang.settings.cookie_consent.translations.repeater.json.label'
                         size: huge
                         language: javascript
                         span: full

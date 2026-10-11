@@ -1,13 +1,13 @@
-<?php namespace OFFLINE\GDPR\Models;
+<?php namespace JosephCrowell\GDPR\Models;
 
 use Model;
-use OFFLINE\GDPR\Classes\Cleanup\CleanupService;
-use OFFLINE\GDPR\Plugin;
+use JosephCrowell\GDPR\Classes\Cleanup\CleanupService;
+use JosephCrowell\GDPR\Plugin;
 
 class DataRetentionSettings extends Model
 {
     public $implement = ['System.Behaviors.SettingsModel'];
-    public $settingsCode = 'offline_gdpr_data_retention_settings';
+    public $settingsCode = 'josephcrowell_gdpr_data_retention_settings';
     public $settingsFields = 'fields.yaml';
 
     public static $defaults = [
@@ -36,7 +36,7 @@ class DataRetentionSettings extends Model
                 if ( ! array_key_exists('class', $model) && ! array_key_exists('id', $model)) {
                     throw new \LogicException(
                         sprintf(
-                            '[OFFLINE.GDPR] Please set at least a class or id attribute for your cleanup model or closure (Plugin ID %s)',
+                            '[JosephCrowell.GDPR] Please set at least a class or id attribute for your cleanup model or closure (Plugin ID %s)',
                             $plugin['id'] ?? 'missing id')
                     );
                 }

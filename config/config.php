@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'presets_path' => plugins_path('offline/gdpr/assets/presets'),
+    'presets_path' => plugins_path('josephcrowell/gdpr/assets/presets'),
 ];

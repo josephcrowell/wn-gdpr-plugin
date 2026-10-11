@@ -1,28 +1,32 @@
 <?php
 
-namespace OFFLINE\GDPR;
+namespace JosephCrowell\GDPR;
 
 use Backend\Facades\Backend;
 use Event;
-use OFFLINE\GDPR\Classes\Cookies\ConsentCookie;
-use OFFLINE\GDPR\Components\ConsentManager;
-use OFFLINE\GDPR\Components\CookieBanner;
-use OFFLINE\GDPR\Components\CookieManager;
-use OFFLINE\GDPR\Console\CleanUp;
-use OFFLINE\GDPR\Console\ImportPresets;
-use OFFLINE\GDPR\Models\CookieConsentSettings;
-use OFFLINE\GDPR\Models\DataRetentionSettings;
-use OFFLINE\GDPR\Models\GDPRSettings;
-use OFFLINE\GDPR\Models\Log;
+use JosephCrowell\GDPR\Classes\Cookies\ConsentCookie;
+use JosephCrowell\GDPR\Components\ConsentManager;
+use JosephCrowell\GDPR\Components\CookieBanner;
+use JosephCrowell\GDPR\Components\CookieManager;
+use JosephCrowell\GDPR\Console\CleanUp;
+use JosephCrowell\GDPR\Console\ImportPresets;
+use JosephCrowell\GDPR\Models\CookieConsentSettings;
+use JosephCrowell\GDPR\Models\DataRetentionSettings;
+use JosephCrowell\GDPR\Models\GDPRSettings;
+use JosephCrowell\GDPR\Models\Log;
 use System\Classes\PluginBase;
-use RainLab\Translate\Models\Attribute;
+use Winter\Translate\Models\Attribute;
 
 class Plugin extends PluginBase
 {
-    const EVENT_CLEANUP_REGISTER = 'offline.gdpr::cleanup.register';
+    const EVENT_CLEANUP_REGISTER = 'josephcrowell.gdpr::cleanup.register';
+    // Keep registrations from plugins that still use the upstream event.
+    const EVENT_CLEANUP_REGISTER_LEGACY = 'offline.gdpr::cleanup.register';
 
     public function register()
     {
+        // Explicit config-file keys need the legacy loader hint as well as an alias.
+        $this->app['config']->package('offline.gdpr', __DIR__ . '/config');
         $this->registerConsoleCommand('gdpr.cleanup', CleanUp::class);
         $this->registerConsoleCommand('gdpr.import', ImportPresets::class);
     }
@@ -36,8 +40,8 @@ class Plugin extends PluginBase
     {
         return [
             ConsentManager::class => 'consentManager',
-            CookieManager::class  => 'cookieManager',
-            CookieBanner::class   => 'cookieBanner',
+            CookieManager::class => 'cookieManager',
+            CookieBanner::class => 'cookieBanner',
         ];
     }
 
@@ -45,7 +49,7 @@ class Plugin extends PluginBase
     {
         return [
             'functions' => [
-                'gdprCookieAllowed'      => function ($code, $level = 0) {
+                'gdprCookieAllowed' => function ($code, $level = 0) {
                     return (new ConsentCookie())->isAllowed($code, $level);
                 },
                 'gdprAllowedCookieLevel' => function ($code) {
@@ -64,24 +68,25 @@ class Plugin extends PluginBase
     public function boot()
     {
         \Event::listen('backend.menu.extendItems', function ($manager) {
-            if ((bool)GDPRSettings::get('log_enabled') !== true) {
-                $manager->removeMainMenuItem('OFFLINE.GDPR', 'main-menu-item');
+            if ((bool) GDPRSettings::get('log_enabled') !== true) {
+                $manager->removeMainMenuItem('JosephCrowell.GDPR', 'main-menu-item');
             }
         });
-        \Event::listen('offline.gdpr::cleanup.register', function () {
+        \Event::listen('josephcrowell.gdpr::cleanup.register', function () {
             return [
-                'id'     => 'offline-gdpr-logs',
-                'label'  => trans('offline.gdpr::lang.plugin.name'),
+                'id' => 'josephcrowell-gdpr-logs',
+                'label' => trans('josephcrowell.gdpr::lang.plugin.name'),
                 'models' => [
                     [
-                        'label'   => trans('offline.gdpr::lang.log.log'),
-                        'comment' => trans('offline.gdpr::lang.log.log_comment'),
-                        'class'   => Log::class,
+                        'label' => trans('josephcrowell.gdpr::lang.log.log'),
+                        'comment' => trans('josephcrowell.gdpr::lang.log.log_comment'),
+                        // This class name is also the key for saved retention settings.
+                        'class' => 'OFFLINE\\GDPR\\Models\\Log',
                     ],
                 ],
             ];
         });
-        if (class_exists(\RainLab\Translate\Models\Attribute::class)) {
+        if (class_exists(\Winter\Translate\Models\Attribute::class)) {
             Attribute::extend(function ($model) {
                 $model->addFillable([
                     'locale',
@@ -97,59 +102,46 @@ class Plugin extends PluginBase
     public function registerSettings()
     {
         return [
-            'gdpr_info'           => [
-                'label'       => trans('offline.gdpr::lang.settings.info.label'),
-                'description' => trans('offline.gdpr::lang.settings.info.description'),
-                'category'    => 'GDPR and ePrivacy',
-                'icon'        => 'icon-info-circle',
-                'url'         => Backend::url('offline/gdpr/info'),
-                'order'       => 200,
-                'keywords'    => 'gdpr',
-                'permissions' => ['offline.gdpr.manage_cookie_info'],
+            'gdpr_info' => [
+                'label' => trans('josephcrowell.gdpr::lang.settings.info.label'),
+                'description' => trans('josephcrowell.gdpr::lang.settings.info.description'),
+                'category' => 'GDPR and ePrivacy',
+                'icon' => 'icon-info-circle',
+                'url' => Backend::url('josephcrowell/gdpr/info'),
+                'order' => 200,
+                'keywords' => 'gdpr',
+                'permissions' => ['josephcrowell.gdpr.manage_cookie_info'],
             ],
-            'gdpr_cookies'        => [
-                'label'       => trans('offline.gdpr::lang.settings.cookies.label'),
-                'description' => trans('offline.gdpr::lang.settings.cookies.description'),
-                'category'    => 'GDPR and ePrivacy',
-                'icon'        => 'oc-icon-list',
-                'url'         => Backend::url('offline/gdpr/cookiegroups'),
-                'order'       => 210,
-                'keywords'    => 'gdpr',
-                'permissions' => ['offline.gdpr.manage_cookie_groups'],
+            'gdpr_cookies' => [
+                'label' => trans('josephcrowell.gdpr::lang.settings.cookies.label'),
+                'description' => trans('josephcrowell.gdpr::lang.settings.cookies.description'),
+                'category' => 'GDPR and ePrivacy',
+                'icon' => 'wn-icon-list',
+                'url' => Backend::url('josephcrowell/gdpr/cookiegroups'),
+                'order' => 210,
+                'keywords' => 'gdpr',
+                'permissions' => ['josephcrowell.gdpr.manage_cookie_groups'],
             ],
             'gdpr_settings' => [
-                'label' => trans('offline.gdpr::lang.settings.general.label'),
-                'description' => trans('offline.gdpr::lang.settings.general.description'),
+                'label' => trans('josephcrowell.gdpr::lang.settings.general.label'),
+                'description' => trans('josephcrowell.gdpr::lang.settings.general.description'),
                 'category' => 'GDPR and ePrivacy',
-                'icon' => 'oc-icon-gear',
+                'icon' => 'wn-icon-gear',
                 'class' => GDPRSettings::class,
                 'order' => 210,
                 'keywords' => 'gdpr',
-                'permissions' => ['offline.gdpr.manage_logs'],
+                'permissions' => ['josephcrowell.gdpr.manage_logs'],
             ],
             'gdpr_data_retention' => [
-                'label'       => trans('offline.gdpr::lang.settings.data_retention.label'),
-                'description' => trans('offline.gdpr::lang.settings.data_retention.description'),
-                'category'    => 'GDPR and ePrivacy',
-                'icon'        => 'oc-icon-trash',
-                'class'       => DataRetentionSettings::class,
-                'order'       => 220,
-                'keywords'    => 'gdpr',
-                'permissions' => ['offline.gdpr.manage_data_retention'],
+                'label' => trans('josephcrowell.gdpr::lang.settings.data_retention.label'),
+                'description' => trans('josephcrowell.gdpr::lang.settings.data_retention.description'),
+                'category' => 'GDPR and ePrivacy',
+                'icon' => 'wn-icon-trash',
+                'class' => DataRetentionSettings::class,
+                'order' => 220,
+                'keywords' => 'gdpr',
+                'permissions' => ['josephcrowell.gdpr.manage_data_retention'],
             ],
-            /**
-             *  @deprecated since version 2.1. Add this menu item back using the backend.menu.extendItems event.
-             */
-            // 'gdpr_cookie_consent' => [
-            //     'label'       => trans('offline.gdpr::lang.settings.cookie_consent.label'),
-            //     'description' => trans('offline.gdpr::lang.settings.cookie_consent.description'),
-            //     'category'    => 'GDPR and ePrivacy',
-            //     'icon'        => 'oc-icon-check-square',
-            //     'class'       => CookieConsentSettings::class,
-            //     'order'       => 200,
-            //     'keywords'    => 'gdpr',
-            //     'permissions' => ['offline.gdpr.manage_cookie_consent'],
-            // ],
         ];
     }
 }

@@ -1,6 +1,6 @@
 title: Logs
-modelClass: OFFLINE\GDPR\Models\Log
-list: $/offline/gdpr/models/log/columns.yaml
+modelClass: JosephCrowell\GDPR\Models\Log
+list: $/josephcrowell/gdpr/models/log/columns.yaml
 noRecordsMessage: 'backend::lang.list.no_records'
 recordsPerPage: 20
 showSetup: true

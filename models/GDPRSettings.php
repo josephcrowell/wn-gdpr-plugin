@@ -1,11 +1,11 @@
-<?php namespace OFFLINE\GDPR\Models;
+<?php namespace JosephCrowell\GDPR\Models;
 
 use Model;
 
 class GDPRSettings extends Model
 {
     public $implement = ['System.Behaviors.SettingsModel'];
-    public $settingsCode = 'offline_gdpr_general_settings';
+    public $settingsCode = 'josephcrowell_gdpr_general_settings';
     public $settingsFields = 'fields.yaml';
 
     public static $defaults = [

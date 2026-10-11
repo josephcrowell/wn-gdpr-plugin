@@ -1,14 +1,14 @@
-<?php namespace OFFLINE\GDPR\Components;
+<?php namespace JosephCrowell\GDPR\Components;
 
 use Cms\Classes\ComponentBase;
 use Cms\Classes\Page;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
-use OFFLINE\GDPR\Classes\Cookies\ConsentCookie;
-use OFFLINE\GDPR\Models\CookieGroup;
-use OFFLINE\GDPR\Models\GDPRSettings;
-use OFFLINE\GDPR\Models\Log;
+use JosephCrowell\GDPR\Classes\Cookies\ConsentCookie;
+use JosephCrowell\GDPR\Models\CookieGroup;
+use JosephCrowell\GDPR\Models\GDPRSettings;
+use JosephCrowell\GDPR\Models\Log;
 
 class CookieBanner extends ComponentBase
 {
@@ -31,7 +31,7 @@ class CookieBanner extends ComponentBase
     {
         return [
             'name'        => 'Cookie Banner',
-            'description' => 'offline.gdpr::lang.cookie_banner.description',
+            'description' => 'josephcrowell.gdpr::lang.cookie_banner.description',
         ];
     }
 
@@ -39,25 +39,25 @@ class CookieBanner extends ComponentBase
     {
         return [
             'include_css'         => [
-                'title'       => 'offline.gdpr::lang.cookie_banner.include_css.title',
-                'description' => 'offline.gdpr::lang.cookie_banner.include_css.description',
+                'title'       => 'josephcrowell.gdpr::lang.cookie_banner.include_css.title',
+                'description' => 'josephcrowell.gdpr::lang.cookie_banner.include_css.description',
                 'default'     => 1,
                 'type'        => 'checkbox',
             ],
             'update_partial'      => [
-                'title'       => 'offline.gdpr::lang.cookie_banner.update_partial.title',
-                'description' => 'offline.gdpr::lang.cookie_banner.update_partial.description',
+                'title'       => 'josephcrowell.gdpr::lang.cookie_banner.update_partial.title',
+                'description' => 'josephcrowell.gdpr::lang.cookie_banner.update_partial.description',
                 'type'        => 'string',
             ],
             'update_selector'     => [
-                'title'       => 'offline.gdpr::lang.cookie_banner.update_selector.title',
-                'description' => 'offline.gdpr::lang.cookie_banner.update_selector.description',
+                'title'       => 'josephcrowell.gdpr::lang.cookie_banner.update_selector.title',
+                'description' => 'josephcrowell.gdpr::lang.cookie_banner.update_selector.description',
                 'default'     => '#gdpr-reload',
                 'type'        => 'string',
             ],
             'cookie_manager_page' => [
-                'title'       => 'offline.gdpr::lang.cookie_banner.cookie_manager_page.title',
-                'description' => 'offline.gdpr::lang.cookie_banner.cookie_manager_page.description',
+                'title'       => 'josephcrowell.gdpr::lang.cookie_banner.cookie_manager_page.title',
+                'description' => 'josephcrowell.gdpr::lang.cookie_banner.cookie_manager_page.description',
                 'type'        => 'dropdown',
             ],
         ];
@@ -151,7 +151,7 @@ class CookieBanner extends ComponentBase
 
     public function getCookie_manager_pageOptions()
     {
-        return [null => '-- ' . trans('offline.gdpr::lang.cookie_banner.cookie_manager_page.empty')]
+        return [null => '-- ' . trans('josephcrowell.gdpr::lang.cookie_banner.cookie_manager_page.empty')]
             + Page::getNameList();
     }
 }

@@ -150,3 +150,6 @@
     - "Fixed October 3 compatibility"
 2.2.30:
     - "Optimized PHP 8.4 support"
+2.2.31:
+    - "Renamed GDPR database tables and saved settings keys to the JosephCrowell namespace"
+    - rename_gdpr_storage.php

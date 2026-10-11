@@ -1,10 +1,10 @@
-<?php namespace OFFLINE\GDPR\Controllers;
+<?php namespace JosephCrowell\GDPR\Controllers;
 
 use Backend\Behaviors\RelationController;
 use Backend\Classes\Controller;
 use BackendMenu;
 use Flash;
-use OFFLINE\GDPR\Models\CookieGroup;
+use JosephCrowell\GDPR\Models\CookieGroup;
 use System\Classes\SettingsManager;
 use Backend\Behaviors\ListController;
 use Backend\Behaviors\FormController;
@@ -14,17 +14,17 @@ class Info extends Controller
 {
 	
     public $requiredPermissions = [
-        'offline.gdpr.manage_cookie_info',
+        'josephcrowell.gdpr.manage_cookie_info',
     ];	
 
     public function __construct()
     {
         parent::__construct();
-        BackendMenu::setContext('October.System', 'system', 'settings');
-        SettingsManager::setContext('OFFLINE.GDPR', 'gdpr_info');
-        $this->addCss('/plugins/offline/gdpr/assets/backend/styles.css');
-		$this->addCss('/plugins/offline/gdpr/assets/backend/prism.css');
-		$this->addJs('/plugins/offline/gdpr/assets/backend/prism.js');
+        BackendMenu::setContext('Winter.System', 'system', 'settings');
+        SettingsManager::setContext('JosephCrowell.GDPR', 'gdpr_info');
+        $this->addCss('/plugins/josephcrowell/gdpr/assets/backend/styles.css');
+		$this->addCss('/plugins/josephcrowell/gdpr/assets/backend/prism.css');
+		$this->addJs('/plugins/josephcrowell/gdpr/assets/backend/prism.js');
     }
 
     public function index()

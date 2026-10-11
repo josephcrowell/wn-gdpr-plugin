@@ -1,7 +1,8 @@
 {
-    "name": "offline/oc-gdpr-plugin",
-    "description": "October CMS plugin to make websites GDPR and ePrivacy compliant",
-    "type": "october-plugin",
+    "name": "josephcrowell/wn-gdpr-plugin",
+    "description": "Winter CMS plugin to make websites GDPR and ePrivacy compliant",
+    "type": "winter-plugin",
+    "homepage": "https://github.com/josephcrowell/wn-gdpr-plugin",
     "license": "MIT",
     "authors": [
         {
@@ -9,5 +10,11 @@
             "email": "tobias@offline.swiss"
         }
     ],
-    "require": {}
+    "require": {},
+    "replace": {
+        "offline/oc-gdpr-plugin": "*"
+    },
+    "extra": {
+        "installer-name": "gdpr"
+    }
 }

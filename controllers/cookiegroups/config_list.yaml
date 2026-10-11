@@ -1,7 +1,7 @@
 title: CookieGroups
-modelClass: OFFLINE\GDPR\Models\CookieGroup
-list: $/offline/gdpr/models/cookiegroup/columns.yaml
-recordUrl: 'offline/gdpr/cookiegroups/update/:id'
+modelClass: JosephCrowell\GDPR\Models\CookieGroup
+list: $/josephcrowell/gdpr/models/cookiegroup/columns.yaml
+recordUrl: 'josephcrowell/gdpr/cookiegroups/update/:id'
 noRecordsMessage: 'backend::lang.list.no_records'
 recordsPerPage: 20
 showSetup: true

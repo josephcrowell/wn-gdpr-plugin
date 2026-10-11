@@ -1,7 +1,7 @@
-<?php namespace OFFLINE\GDPR\Components;
+<?php namespace JosephCrowell\GDPR\Components;
 
 use Cms\Classes\ComponentBase;
-use OFFLINE\GDPR\Models\CookieConsentSettings;
+use JosephCrowell\GDPR\Models\CookieConsentSettings;
 
 class ConsentManager extends ComponentBase
 {
@@ -20,7 +20,7 @@ class ConsentManager extends ComponentBase
     {
         return [
             'name'        => 'Klaro! Consent Manager',
-            'description' => 'offline.gdpr::lang.consent_manager.description',
+            'description' => 'josephcrowell.gdpr::lang.consent_manager.description',
         ];
     }
 
@@ -28,14 +28,14 @@ class ConsentManager extends ComponentBase
     {
         return [
             'include_assets' => [
-                'title'       => 'offline.gdpr::lang.consent_manager.include_assets.title',
-                'description' => 'offline.gdpr::lang.consent_manager.include_assets.description',
+                'title'       => 'josephcrowell.gdpr::lang.consent_manager.include_assets.title',
+                'description' => 'josephcrowell.gdpr::lang.consent_manager.include_assets.description',
                 'default'     => 1,
                 'type'        => 'checkbox',
             ],
             'style_prefix' => [
-                'title'       => 'offline.gdpr::lang.consent_manager.style_prefix.title',
-                'description' => 'offline.gdpr::lang.consent_manager.style_prefix.description',
+                'title'       => 'josephcrowell.gdpr::lang.consent_manager.style_prefix.title',
+                'description' => 'josephcrowell.gdpr::lang.consent_manager.style_prefix.description',
                 'type'        => 'string',
             ],
         ];
@@ -51,7 +51,7 @@ class ConsentManager extends ComponentBase
         }
 
         $settings = optional(
-            CookieConsentSettings::where('item', 'offline_gdpr_cookie_consent_settings')->first()
+            CookieConsentSettings::where('item', 'josephcrowell_gdpr_cookie_consent_settings')->first()
         )->value;
 
 

@@ -1,5 +1,5 @@
 title: CookieGroups
-modelClass: OFFLINE\GDPR\Models\CookieGroup
+modelClass: JosephCrowell\GDPR\Models\CookieGroup
 nameFrom: name
 toolbar:
     buttons: reorder_toolbar

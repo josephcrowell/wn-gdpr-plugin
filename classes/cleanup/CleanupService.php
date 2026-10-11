@@ -1,12 +1,12 @@
 <?php
 
-namespace OFFLINE\GDPR\Classes\Cleanup;
+namespace JosephCrowell\GDPR\Classes\Cleanup;
 
 
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Event;
-use OFFLINE\GDPR\Models\DataRetentionSettings;
-use OFFLINE\GDPR\Plugin as GDPRPlugin;
+use JosephCrowell\GDPR\Models\DataRetentionSettings;
+use JosephCrowell\GDPR\Plugin as GDPRPlugin;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Style\OutputStyle;
 
@@ -36,7 +36,10 @@ class CleanupService
 
     public function getPlugins()
     {
-        return collect(Event::fire(GDPRPlugin::EVENT_CLEANUP_REGISTER))->keyBy('id');
+        return collect(array_merge(
+            Event::fire(GDPRPlugin::EVENT_CLEANUP_REGISTER_LEGACY),
+            Event::fire(GDPRPlugin::EVENT_CLEANUP_REGISTER)
+        ))->keyBy('id');
     }
 
     protected function handlePlugin($plugin)
@@ -128,7 +131,7 @@ class CleanupService
     public function getKeepDays()
     {
         return [
-            'label' => 'offline.gdpr::lang.settings.data_retention.keep_days.label',
+            'label' => 'josephcrowell.gdpr::lang.settings.data_retention.keep_days.label',
             'span'  => 'auto',
             'type'  => 'number',
             'tab'   => 'Plugins',
@@ -142,7 +145,7 @@ class CleanupService
         }
 
         $settings = optional(
-            DataRetentionSettings::where('item', 'offline_gdpr_data_retention_settings')->first()
+            DataRetentionSettings::where('item', 'josephcrowell_gdpr_data_retention_settings')->first()
         )->value;
 
         $base   = array_merge(DataRetentionSettings::$defaults, array_wrap($settings));

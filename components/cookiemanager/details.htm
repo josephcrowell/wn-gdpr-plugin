@@ -5,21 +5,21 @@
             {% for entry in cookie.item_details %}
                 <div class="gdpr-cookie-manager__cookie-item">
                     <p>
-                        <strong>{{ 'offline.gdpr::lang.cookie.fields.cookie_levels.name' | trans }}:</strong>
+                        <strong>{{ 'josephcrowell.gdpr::lang.cookie.fields.cookie_levels.name' | trans }}:</strong>
                         {{ entry.detail_name }}
                     </p>
                     {% if loop.first %}
                     <p>
-                        <strong>{{ 'offline.gdpr::lang.cookie.fields.cookie_levels.provider' | trans }}:</strong>
+                        <strong>{{ 'josephcrowell.gdpr::lang.cookie.fields.cookie_levels.provider' | trans }}:</strong>
                         {{ cookie.provider }}
                     </p>
                     {% endif %}
                     <p>
-                        <strong>{{ 'offline.gdpr::lang.cookie.fields.cookie_levels.expiry' | trans }}:</strong>
+                        <strong>{{ 'josephcrowell.gdpr::lang.cookie.fields.cookie_levels.expiry' | trans }}:</strong>
                         {{ entry.detail_expiry }}
                     </p>
                     <p>
-                        <strong>{{ 'offline.gdpr::lang.cookie.fields.cookie_levels.type' | trans }}:</strong>
+                        <strong>{{ 'josephcrowell.gdpr::lang.cookie.fields.cookie_levels.type' | trans }}:</strong>
                         {{ entry.detail_type }}
                     </p>
                 </div>
@@ -31,7 +31,7 @@
         {% if cookie.contact_details_dpo %}
             <div>
                 <h4 class="gdpr-cookie-manager__contact-details-heading">
-                    {{ 'offline.gdpr::lang.common.contact_details' | trans }}
+                    {{ 'josephcrowell.gdpr::lang.common.contact_details' | trans }}
                 </h4>
                 <div>
                     {{ cookie.contact_details_dpo | raw }}
@@ -42,7 +42,7 @@
         {% if cookie.contact_links_dpo | length > 0 %}
             <div>
                 <h4 class="gdpr-cookie-manager__contact-details-heading">
-                    {{ 'offline.gdpr::lang.common.links' | trans }}
+                    {{ 'josephcrowell.gdpr::lang.common.links' | trans }}
                 </h4>
                 <ul class="gdpr-cookie-manager__contact-list">
                     {% for link in cookie.contact_links_dpo %}

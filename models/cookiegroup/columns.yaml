@@ -1,15 +1,15 @@
 columns:
     name:
-        label: 'offline.gdpr::lang.cookie_group.fields.name'
+        label: 'josephcrowell.gdpr::lang.cookie_group.fields.name'
         type: text
     slug:
-        label: 'offline.gdpr::lang.cookie_group.fields.slug'
+        label: 'josephcrowell.gdpr::lang.cookie_group.fields.slug'
         type: text
     description:
-        label: 'offline.gdpr::lang.cookie_group.tabs.description'
+        label: 'josephcrowell.gdpr::lang.cookie_group.tabs.description'
         type: text
         invisible: true
     required:
-        label: 'offline.gdpr::lang.cookie_group.fields.required'
+        label: 'josephcrowell.gdpr::lang.cookie_group.fields.required'
         type: partial
-        path: $/offline/gdpr/models/cookie/_initial_status.htm
+        path: $/josephcrowell/gdpr/models/cookie/_initial_status.htm

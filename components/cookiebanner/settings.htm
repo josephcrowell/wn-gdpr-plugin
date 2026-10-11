@@ -2,7 +2,7 @@
     <div class="gdpr-banner__settings">
         <a role="link" rel="privacy" href="{{ __SELF__.cookieManagerPage | page }}"
            data-request="onDecline"
-           data-request-success="document.location.href = '{{ __SELF__.cookieManagerPage | page }}'"
+           data-request-redirect="{{ __SELF__.cookieManagerPage | page }}"
         >
             {{ 'josephcrowell.gdpr::lang.cookie_banner.advanced_settings' | trans }}
         </a>

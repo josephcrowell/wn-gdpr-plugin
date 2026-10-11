@@ -88,8 +88,10 @@ class CookieBanner extends ComponentBase
         }
 
         if ($this->property('include_css')) {
+            $this->addCss('assets/frontend/ui.css');
             $this->addCss('assets/cookieBanner/banner.css');
         }
+        $this->addJs('assets/cookieBanner/banner.js');
     }
 
     public function onAccept()

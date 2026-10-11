@@ -37,6 +37,9 @@ the AJAX request, HTML data-attribute handling, and extras modules. The base `{%
 tag alone does not load these modules. Winter CMS already loads Snowboard in the backend;
 this step is required for your frontend theme layouts.
 
+1. Render Winter's component assets in your layout. Put `{% styles %}` in the `<head>` and
+`{% scripts %}` before `</body>`, after the Snowboard tag.
+
 1. Define your cookie groups and cookies via the backend settings page.
 You can also import a example preset by running `php artisan gdpr:import`
 1. Place the `cookieManager` component on a `cookies.htm` page
@@ -85,6 +88,59 @@ is_hidden = 0
 ==
 {% component 'cookieManager' %}
 ```
+
+### Standalone frontend styling
+
+The cookie banner and cookie manager ship their own compiled Tailwind CSS 4.3 and daisyUI 5
+styles. They keep the original layout, light-mode colours, spacing, toggle appearance, and responsive
+breakpoints without Bootstrap, a CSS reset, or any particular theme. You do not need to install
+Tailwind or daisyUI in your theme, and no CDN or runtime CSS compiler is used.
+
+Leave `include_css = 1` (the default) on both components. The shared UI stylesheet and each
+component's styles are registered automatically and rendered by `{% styles %}`. Controls use
+the `gdpr-ui-` daisyUI prefix, theme variables are local to `.gdpr-ui`, and Tailwind's global
+preflight is not included, so the plugin does not reset or theme the rest of your site.
+
+Setting `include_css = 0` opts out of the bundled styling; in that case you must supply all
+component styles yourself. Existing `gdpr-banner__*` and `gdpr-cookie-manager__*` classes remain
+available for custom partials and CSS. Cookie toggles now use the native, keyboard-accessible
+checkbox class `gdpr-cookie-manager__toggle` instead of the global `tgl` / `tgl-btn` classes.
+If your theme overrides the default component partials, update those copies to include the
+`.gdpr-ui` root and the new control classes, or remove the overrides to use the shipped partials.
+
+#### Automatic light/dark mode
+
+The bundled styles use daisyUI's native `default: true` light theme and `prefersdark: true`
+dark theme. daisyUI generates the `prefers-color-scheme` media query, so the components follow
+the visitor's operating-system preference and update automatically if it changes. This works
+without JavaScript; the plugin adds no theme switch, detection script, or stored theme preference.
+
+Theme colours are inherited when the surrounding page already applies a daisyUI theme with
+`data-theme`, including custom themes such as `sonicde-light` and `sonicde-dark`. An explicit
+`data-theme="light"` or `data-theme="dark"` on a `.gdpr-ui` component root can also override the
+system preference for that component. These are optional integrations: the bundled automatic
+themes work on their own, without a theme dependency, and do not change the host page's theme.
+
+#### Rebuilding and testing frontend assets
+
+The compiled CSS is included in the plugin, so these commands are only needed for development.
+Run them from `plugins/josephcrowell/gdpr`, not from the CMS or theme directory:
+
+```sh
+npm ci
+npm run build:css
+npm test
+npx playwright install chromium
+npm run test:frontend
+```
+
+Edit `assets/src/base.css`, `assets/src/banner.css`, and `assets/src/manager.css`, then rebuild.
+The build writes `assets/frontend/ui.css`, `assets/cookieBanner/banner.css`, and
+`assets/cookieManager/manager.css`. Do not edit those generated files directly. Browser tests
+render the real component partials on an otherwise unstyled page and compare them against
+screenshots captured from the original styles at mobile, tablet, and desktop widths. They
+also check form interactions, keyboard access, and isolation from host-page CSS. The fixture
+renderer uses PHP and the parent Winter installation's Composer dependencies.
 
 #### Cookie presets
 

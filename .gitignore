@@ -1,3 +1,6 @@
 /vendor/
 /.idea/
 /graphify-out
+/node_modules/
+/playwright-report/
+/test-results/

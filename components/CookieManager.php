@@ -55,6 +55,7 @@ class CookieManager extends ComponentBase
     {
         $this->includeJs = $this->property('include_js', true);
         if ($this->property('include_css')) {
+            $this->addCss('assets/frontend/ui.css');
             $this->addCss('assets/cookieManager/manager.css');
         }
 

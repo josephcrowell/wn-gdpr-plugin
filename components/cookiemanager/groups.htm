@@ -16,7 +16,7 @@
             </li>
         {% endfor %}
         <li>
-            <select class="gdpr-cookie-manager__consent_expiry" name="consent_expiry" id="gdpr">
+            <select class="gdpr-ui-select gdpr-cookie-manager__consent_expiry" name="consent_expiry" id="gdpr">
                 {% for i in [3, 6, 12, 24, 36] %}
                     {% set selected = __SELF__.consentExpiry | default(12) %}
                     <option value="{{ i }}" {{ selected == i ? 'selected' }}>

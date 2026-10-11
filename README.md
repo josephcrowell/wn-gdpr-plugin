@@ -14,6 +14,8 @@ The upstream cleanup registration event remains supported for existing integrati
 
 ## Features
 
+* **Wide cookie banner** with group-level choices, accent colour schemes, and an optional cookie illustration (integrated from [GDPR Plus](https://github.com/Hounddd/wn-gdprplus-plugin)).
+
 * [Cookie Consent Manager](#cookie-consent-manager)
 * [Data retention](#data-retention)
 
@@ -91,12 +93,12 @@ is_hidden = 0
 
 ### Standalone frontend styling
 
-The cookie banner and cookie manager ship their own compiled Tailwind CSS 4.3 and daisyUI 5
+The cookie banners and cookie manager ship their own compiled Tailwind CSS 4.3 and daisyUI 5
 styles. They keep the original layout, light-mode colours, spacing, toggle appearance, and responsive
 breakpoints without Bootstrap, a CSS reset, or any particular theme. You do not need to install
 Tailwind or daisyUI in your theme, and no CDN or runtime CSS compiler is used.
 
-Leave `include_css = 1` (the default) on both components. The shared UI stylesheet and each
+Leave `include_css = 1` (the default) on these components. The shared UI stylesheet and each
 component's styles are registered automatically and rendered by `{% styles %}`. Controls use
 the `gdpr-ui-` daisyUI prefix, theme variables are local to `.gdpr-ui`, and Tailwind's global
 preflight is not included, so the plugin does not reset or theme the rest of your site.
@@ -134,15 +136,100 @@ npx playwright install chromium
 npm run test:frontend
 ```
 
-Edit `assets/src/base.css`, `assets/src/banner.css`, and `assets/src/manager.css`, then rebuild.
-The build writes `assets/frontend/ui.css`, `assets/cookieBanner/banner.css`, and
-`assets/cookieManager/manager.css`. Do not edit those generated files directly. Browser tests
-render the real component partials on an otherwise unstyled page and compare them against
-screenshots captured from the original styles at mobile, tablet, and desktop widths. They
-also check form interactions, keyboard access, and isolation from host-page CSS. The fixture
+Edit `assets/src/base.css`, `assets/src/banner.css`, `assets/src/manager.css`, and
+`assets/src/wide.css`, then rebuild.
+The build writes `assets/frontend/ui.css`, `assets/cookieBanner/banner.css`,
+`assets/cookieManager/manager.css`, and `assets/cookieBannerWide/banner.css`. Do not edit those
+generated files directly. Browser tests render the real component partials on an otherwise
+unstyled page and compare the original banner and manager against their existing mobile,
+tablet, and desktop screenshot references. They also check the wide banner, form interactions,
+keyboard access, automatic light/dark mode, and isolation from host-page CSS. The fixture
 renderer uses PHP and the parent Winter installation's Composer dependencies.
 
-#### Cookie presets
+Run `../../../vendor/bin/phpunit --no-configuration tests` from the plugin directory to test
+storage compatibility and the wide banner's server-side consent handlers using in-memory SQLite.
+
+### Wide cookie banner
+
+The GDPR Plus wide-banner functionality is included directly in `JosephCrowell.GDPR`. No
+separate `Hounddd.GdprPlus` or `OFFLINE.GDPR` installation is required. This plugin declares
+itself a replacement for those packages to avoid duplicate component registrations.
+
+Use `cookieBannerWide` **instead of** `cookieBanner` in your layout, not alongside it:
+
+```twig
+[cookieBannerWide]
+include_css = 1
+bg_cookie = 1
+color_scheme = "blue"
+cookie_manager_page = "cookies"
+update_partial = "gdpr"
+update_selector = "#gdpr-reload"
+==
+{% component 'cookieBannerWide' %}
+```
+
+It inherits the ordinary banner's configuration, consent cookie, logging, accept/decline
+handlers, and soft-reload behaviour, and adds:
+
+* A responsive, native modal dialog with group toggles and **Save my choice**.
+* `bg_cookie`: display the bundled cookie illustration (default `0`).
+* `color_scheme`: one of `blue` (default), `red`, `orange`, `amber`, `yellow`, `lime`, `green`,
+  `emerald`, `teal`, `cyan`, `sky`, `indigo`, `violet`, `purple`, `fuchsia`, `pink`, or `rose`.
+* Automatic suppression when consent is already recorded or the current page contains
+  `cookieManager`, including a manager registered under a custom alias.
+* A settings-page dropdown restricted to pages that actually contain `cookieManager`.
+
+Optional groups start selected only if they contain an active cookie preset (`initial_status`).
+Like the upstream wide banner, saving selected groups or accepting all applies their active
+cookie presets at the maximum level. Required cookies are always included server-side, even
+if their disabled toggles are omitted from the submitted form. Use the cookie-manager page
+for individual cookie/level choices. Invalid group-ID payloads are rejected before consent changes.
+
+The dialog uses native JavaScript and Snowboard, with no jQuery or Bootstrap. Successful
+requests update the configured partial and close the dialog; failed requests leave it open
+for retry. Escape closes it without recording consent. It uses the same daisyUI automatic
+light/dark mode as the other components, with no additional theme switch or detection script.
+
+Customise the accent colours and toggle size with the existing GDPR Plus CSS variables in
+CSS loaded after the plugin assets:
+
+```css
+.gdpr-bannerwide__wrapper {
+    --color-background: #bfdbfe;
+    --color-border: #3b82f6;
+    --color-accent: #1d4ed8;
+}
+.gdpr-bannerwide {
+    --toggle-size: 20px;
+    --toggle-speed: .25s;
+}
+```
+
+Default toggle sizes are 20px below 768px, 22px at 768px, 24px at 1024px, and 28px at 1280px.
+Custom partials retain the `cookiebannerwide` partial names and `gdpr-bannerwide__*` class
+prefix, but should use the shipped native checkbox/dialog markup and `data-gdpr-banner-dismiss`
+success marker rather than the old jQuery success callbacks.
+
+English and French text is provided under `josephcrowell.gdpr::lang.components.bannerwide`.
+Site overrides belong in `lang/en/josephcrowell/gdpr/lang.php` (or the equivalent locale path):
+
+```php
+return [
+    'components' => [
+        'bannerwide' => [
+            'title' => 'We use cookies.',
+            'message' => 'Your customised cookie notice.',
+        ],
+    ],
+];
+```
+
+The message supports trusted HTML from translation files. Existing GDPR Plus installations
+should move their `hounddd/gdprplus` translation overrides to this namespace. No database
+migration or change to existing consent data is needed for the wide-banner integration.
+
+### Cookie presets
 
 It is possible to define your cookie groups and cookies in a `yaml` file and import them using the `gdpr:import` console command.
 This allows you to define cookies once and re-use them between installations.

@@ -1,0 +1,14 @@
+<div class="gdpr-bannerwide__cookie-group {{ group.required ? 'gdpr-bannerwide__cookie-group--required' : '' }}">
+    <label for="{{ __SELF__ }}-group-{{ group.id }}" class="gdpr-bannerwide__toggle" title="{{ group.description | striptags }}">
+        {{ group.name }}
+        <input type="checkbox" id="{{ __SELF__ }}-group-{{ group.id }}" name="cookies[]" value="{{ group.id }}"
+               class="gdpr-ui-toggle gdpr-bannerwide__toggle-checkbox"
+               {{ group.required or group.id in __SELF__.selectedGroupIds ? 'checked' : '' }}
+               {{ group.required ? 'disabled' : '' }}>
+    </label>
+    <span class="gdpr-bannerwide__cookie-group-cookies">
+        {% for cookie in group.cookies %}
+            {{ cookie.name }}{% if not loop.last %}<br>{% endif %}
+        {% endfor %}
+    </span>
+</div>

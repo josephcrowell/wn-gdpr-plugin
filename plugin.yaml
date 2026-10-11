@@ -6,6 +6,7 @@ plugin:
     homepage: 'https://github.com/josephcrowell/wn-gdpr-plugin'
     replaces:
         OFFLINE.GDPR: '*'
+        Hounddd.GdprPlus: '*'
 permissions:
     josephcrowell.gdpr.manage_cookie_consent:
         tab: 'josephcrowell.gdpr::lang.plugin.name'

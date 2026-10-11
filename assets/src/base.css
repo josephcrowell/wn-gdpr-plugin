@@ -1,6 +1,6 @@
 /* No Tailwind preflight or global theme: these assets must not restyle the host page. */
 @import "tailwindcss/utilities.css" source(none);
-@source inline("gdpr-ui-btn gdpr-ui-select gdpr-ui-toggle");
+@source inline("gdpr-ui-btn gdpr-ui-select gdpr-ui-toggle gdpr-ui-modal gdpr-ui-modal-box gdpr-ui-modal-action");
 
 @theme inline {
     --spacing: 4px;
@@ -13,7 +13,7 @@
     themes: false;
     root: ".gdpr-ui";
     prefix: "gdpr-ui-";
-    include: button, select, toggle;
+    include: button, select, toggle, modal;
     logs: false;
 }
 

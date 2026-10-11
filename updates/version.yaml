@@ -153,3 +153,6 @@
 2.2.31:
     - "Renamed GDPR database tables and saved settings keys to the JosephCrowell namespace"
     - rename_gdpr_storage.php
+2.3.0:
+    - "Added the wide cookie banner, group selection, colour schemes, and optional cookie illustration"
+    - "Integrated GDPR Plus functionality using JosephCrowell namespaces, Tailwind/daisyUI, and native Snowboard requests"

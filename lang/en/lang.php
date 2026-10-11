@@ -43,6 +43,33 @@
             'description' => 'The manager is only loaded if the onRenderCookieManager method is called explicitly',
         ],
     ],
+    'components' => [
+        'bannerwide' => [
+            'name' => 'Wide cookie banner',
+            'description' => 'Displays a wide cookie banner with group selection',
+            'title' => 'This website uses cookies.',
+            'message' => 'This website uses cookies to process personal data. One of the purposes of such processing is the integration of content and services provided by partners with whom we also share information, which they may combine with other information you have provided to them or that they have collected during your use of their services.<br>You are free to accept or refuse. Your consent is optional, not required to use the site, and may be withdrawn or modified at any time.',
+            'invalid_selection' => 'Select valid cookie groups.',
+            'bg_cookie' => [
+                'title' => 'Cookie background',
+                'description' => 'Show a cookie illustration in the banner',
+            ],
+            'buttons' => [
+                'accept_all' => 'Accept all',
+                'accept_selection' => 'Save my choice',
+            ],
+            'color_scheme' => [
+                'title' => 'Colour scheme',
+                'description' => 'Accent colours for the banner toggles and buttons',
+                'colors' => [
+                    'blue' => 'Blue', 'red' => 'Red', 'orange' => 'Orange', 'amber' => 'Amber',
+                    'yellow' => 'Yellow', 'lime' => 'Lime', 'green' => 'Green', 'emerald' => 'Emerald',
+                    'teal' => 'Teal', 'cyan' => 'Cyan', 'sky' => 'Sky', 'indigo' => 'Indigo',
+                    'violet' => 'Violet', 'purple' => 'Purple', 'fuchsia' => 'Fuchsia', 'pink' => 'Pink', 'rose' => 'Rose',
+                ],
+            ],
+        ],
+    ],
     'cookie_manager' => [
         'description' => 'Displays an overview and edit form for all the cookies you have defined in the backend settings',
         'expiry' => [

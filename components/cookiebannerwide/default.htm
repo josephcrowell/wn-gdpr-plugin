@@ -1,0 +1,20 @@
+{% if not __SELF__.hide %}
+    <dialog open class="gdpr-ui gdpr-ui-modal gdpr-bannerwide" aria-modal="true"
+            aria-labelledby="{{ __SELF__ }}-title" aria-describedby="{{ __SELF__ }}-message">
+        <form method="post"
+              class="gdpr-ui-modal-box gdpr-bannerwide__wrapper gdpr-bannerwide__wrapper--{{ __SELF__.colorScheme }} {{ __SELF__.bgCookies ? 'gdpr-bannerwide__wrapper--bgCookie' : '' }}"
+              data-request="{{ __SELF__ }}::onSubmit"
+              data-gdpr-banner-dismiss>
+            {{ form_token() }}
+            {% partial __SELF__ ~ '::title' %}
+            {% partial __SELF__ ~ '::message' %}
+            {% partial __SELF__ ~ '::cookiegroups' %}
+            <div class="gdpr-ui-modal-action gdpr-bannerwide__footer">
+                {% partial __SELF__ ~ '::optout' %}
+                {% partial __SELF__ ~ '::optselection' %}
+                {% partial __SELF__ ~ '::optin' %}
+                {% partial __SELF__ ~ '::settings' %}
+            </div>
+        </form>
+    </dialog>
+{% endif %}

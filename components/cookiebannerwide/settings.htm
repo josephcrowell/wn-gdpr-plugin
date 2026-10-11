@@ -1,0 +1,8 @@
+{% if __SELF__.cookieManagerPage %}
+    <div class="gdpr-bannerwide__settings">
+        <a href="{{ __SELF__.cookieManagerPage | page }}" data-request="{{ __SELF__ }}::onDecline"
+           data-request-redirect="{{ __SELF__.cookieManagerPage | page }}">
+            {{ 'josephcrowell.gdpr::lang.cookie_banner.advanced_settings' | trans }}
+        </a>
+    </div>
+{% endif %}

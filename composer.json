@@ -8,11 +8,17 @@
         {
             "name": "Tobias Kündig",
             "email": "tobias@offline.swiss"
+        },
+        {
+            "name": "Hounddd - Damien MATHIEU",
+            "email": "damien@hounddd.fr",
+            "role": "Original GDPR Plus author"
         }
     ],
     "require": {},
     "replace": {
-        "offline/oc-gdpr-plugin": "*"
+        "offline/oc-gdpr-plugin": "*",
+        "hounddd/wn-gdprplus-plugin": "*"
     },
     "extra": {
         "installer-name": "gdpr"

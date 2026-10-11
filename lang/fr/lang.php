@@ -43,6 +43,33 @@
             'description' => 'Le gestionnaire n\'est chargé que si la méthode onRenderCookieManager est appelée explicitement.',
         ],
     ],
+    'components' => [
+        'bannerwide' => [
+            'name' => 'Bannière cookies large',
+            'description' => 'Affiche une bannière de cookies avec sélection des groupes',
+            'title' => 'Ce site web utilise des cookies.',
+            'message' => 'Ce site web utilise les cookies pour traiter des données personnelles. Ces traitements ont notamment pour finalités l’intégration de contenus et services fournis par des partenaires avec qui nous partageons également des informations, qu’ils peuvent combiner avec d’autres informations que vous leur avez fournies ou qu’ils ont collectées lors de votre utilisation de leurs services.<br>Vous êtes libre d’accepter ou de refuser. Votre consentement est facultatif, il n’est pas indispensable à l’utilisation du site et peut être retiré ou modifié à tout moment.',
+            'invalid_selection' => 'Sélectionnez des groupes de cookies valides.',
+            'bg_cookie' => [
+                'title' => 'Illustration de cookies',
+                'description' => 'Afficher une illustration de cookies dans la bannière',
+            ],
+            'buttons' => [
+                'accept_all' => 'Tout accepter',
+                'accept_selection' => 'Enregistrer mon choix',
+            ],
+            'color_scheme' => [
+                'title' => 'Thème de couleur',
+                'description' => 'Couleurs des bascules et boutons de la bannière',
+                'colors' => [
+                    'blue' => 'Bleu', 'red' => 'Rouge', 'orange' => 'Orange', 'amber' => 'Ambre',
+                    'yellow' => 'Jaune', 'lime' => 'Vert clair', 'green' => 'Vert', 'emerald' => 'Émeraude',
+                    'teal' => 'Turquoise', 'cyan' => 'Cyan', 'sky' => 'Bleu ciel', 'indigo' => 'Indigo',
+                    'violet' => 'Violet', 'purple' => 'Pourpre', 'fuchsia' => 'Fuchsia', 'pink' => 'Rose doux', 'rose' => 'Rose',
+                ],
+            ],
+        ],
+    ],
     'cookie_manager'  => [
         'description' => 'Affiche une vue d\'ensemble et la possibilité de modifier tous les cookies que vous avez définis dans les paramètres du backend.',
         'expiry'      => [

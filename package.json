@@ -2,7 +2,7 @@
     "name": "winter-gdpr-frontend",
     "private": true,
     "scripts": {
-        "build:css": "tailwindcss -i assets/src/base.css -o assets/frontend/ui.css --minify && tailwindcss -i assets/src/banner.css -o assets/cookieBanner/banner.css --minify && tailwindcss -i assets/src/manager.css -o assets/cookieManager/manager.css --minify",
+        "build:css": "tailwindcss -i assets/src/base.css -o assets/frontend/ui.css --minify && tailwindcss -i assets/src/banner.css -o assets/cookieBanner/banner.css --minify && tailwindcss -i assets/src/manager.css -o assets/cookieManager/manager.css --minify && tailwindcss -i assets/src/wide.css -o assets/cookieBannerWide/banner.css --minify",
         "test": "node --test tests/*.cjs",
         "test:frontend": "playwright test"
     },

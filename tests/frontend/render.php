@@ -62,6 +62,9 @@ class FixtureComponent
     public $cookieManagerPage = 'cookies';
     public $updatePartial = 'gdpr';
     public $updateSelector = '#gdpr-reload';
+    public $bgCookies = false;
+    public $colorScheme = 'blue';
+    public $selectedGroupIds = [1, 2];
     private $alias;
 
     public function __construct(string $alias)
@@ -77,8 +80,9 @@ class FixtureComponent
 
 $root = dirname(__DIR__, 2);
 $templates = [];
-foreach (glob($root . '/components/{cookiebanner,cookiemanager}/*.htm', GLOB_BRACE) as $file) {
+foreach (glob($root . '/components/{cookiebanner,cookiemanager,cookiebannerwide}/*.htm', GLOB_BRACE) as $file) {
     $relative = substr($file, strlen($root) + 1);
+    if (getenv('GDPR_LEGACY_REF') && basename(dirname($file)) === 'cookiebannerwide') continue;
     $content = getenv('GDPR_LEGACY_REF')
         ? shell_exec('git -C ' . escapeshellarg($root) . ' show ' . escapeshellarg(getenv('GDPR_LEGACY_REF') . ':' . $relative))
         : file_get_contents($file);
@@ -96,16 +100,25 @@ $translations = [
 ];
 $twig = new Environment(new ArrayLoader($templates));
 $twig->addTokenParser(new FixturePartialParser());
-$twig->addFilter(new TwigFilter('trans', function ($key) use ($translations) {
+$wideTranslations = (require $root . '/lang/en/lang.php')['components']['bannerwide'];
+$twig->addFilter(new TwigFilter('trans', function ($key) use ($translations, $wideTranslations) {
     $key = str_replace('josephcrowell.gdpr::lang.', '', $key);
     if (str_starts_with($key, 'cookie_manager.expiry.')) {
         return substr($key, strlen('cookie_manager.expiry.')) . ' months';
+    }
+    if (str_starts_with($key, 'components.bannerwide.')) {
+        $value = $wideTranslations;
+        foreach (explode('.', substr($key, strlen('components.bannerwide.'))) as $part) {
+            $value = $value[$part] ?? $key;
+        }
+        return $value;
     }
     return $translations[$key] ?? ucfirst(str_replace('_', ' ', substr($key, strrpos($key, '.') + 1)));
 }));
 $twig->addFilter(new TwigFilter('page', fn () => '/cookies'));
 $twig->addFunction(new TwigFunction('form_open', fn () => '<form method="post">', ['is_safe' => ['html']]));
 $twig->addFunction(new TwigFunction('form_close', fn () => '</form>', ['is_safe' => ['html']]));
+$twig->addFunction(new TwigFunction('form_token', fn () => '<input type="hidden" name="_token" value="fixture-csrf">', ['is_safe' => ['html']]));
 
 $groups = [
     [
@@ -137,7 +150,25 @@ $groups = [
     ],
 ];
 
-$component = new FixtureComponent($argv[1] ?? 'cookiebanner');
+$componentName = $argv[1] ?? 'cookiebanner';
+$alias = $argv[5] ?? $componentName;
+if ($alias !== $componentName) {
+    foreach ($templates as $name => $content) {
+        if (str_starts_with($name, $componentName . '::')) {
+            $twig->getLoader()->setTemplate($alias . substr($name, strlen($componentName)), $content);
+        }
+    }
+}
+$component = new FixtureComponent($alias);
+if ($componentName === 'cookiebannerwide') {
+    $component->colorScheme = $argv[2] ?? 'blue';
+    $component->bgCookies = ($argv[3] ?? '0') === '1';
+    $component->selectedGroupIds = ($argv[4] ?? '') === 'inactive' ? [1] : [1, 2];
+    $groups[] = [
+        'id' => 3, 'name' => 'Personalisation', 'description' => 'Optional cookies', 'required' => false,
+        'cookies' => [['id' => 3, 'name' => 'Disabled preset', 'code' => 'personalisation']],
+    ];
+}
 $component->cookieGroups = $groups;
 $component->consent = ['session' => 0, 'analytics' => 0];
-echo $twig->render($component . '::default', ['__SELF__' => $component]);
+echo $twig->render($componentName . '::default', ['__SELF__' => $component]);

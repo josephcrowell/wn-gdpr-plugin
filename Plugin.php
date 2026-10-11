@@ -7,6 +7,7 @@ use Event;
 use JosephCrowell\GDPR\Classes\Cookies\ConsentCookie;
 use JosephCrowell\GDPR\Components\ConsentManager;
 use JosephCrowell\GDPR\Components\CookieBanner;
+use JosephCrowell\GDPR\Components\CookieBannerWide;
 use JosephCrowell\GDPR\Components\CookieManager;
 use JosephCrowell\GDPR\Console\CleanUp;
 use JosephCrowell\GDPR\Console\ImportPresets;
@@ -42,6 +43,7 @@ class Plugin extends PluginBase
             ConsentManager::class => 'consentManager',
             CookieManager::class => 'cookieManager',
             CookieBanner::class => 'cookieBanner',
+            CookieBannerWide::class => 'cookieBannerWide',
         ];
     }
 

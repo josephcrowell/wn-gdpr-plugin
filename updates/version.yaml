@@ -156,3 +156,6 @@
 2.3.0:
     - "Added the wide cookie banner, group selection, colour schemes, and optional cookie illustration"
     - "Integrated GDPR Plus functionality using JosephCrowell namespaces, Tailwind/daisyUI, and native Snowboard requests"
+2.3.1:
+    - "Fixed Winter CMS plugin replacement compatibility"
+    - "Fixed backend information page styling, light/dark mode support, and Google Translate icon sizing"

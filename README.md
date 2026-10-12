@@ -136,10 +136,10 @@ npx playwright install chromium
 npm run test:frontend
 ```
 
-Edit `assets/src/base.css`, `assets/src/banner.css`, `assets/src/manager.css`, and
-`assets/src/wide.css`, then rebuild.
+Edit `assets/src/base.css`, `assets/src/banner.css`, `assets/src/manager.css`,
+`assets/src/wide.css`, and `assets/src/info.css`, then rebuild.
 The build writes `assets/frontend/ui.css`, `assets/cookieBanner/banner.css`,
-`assets/cookieManager/manager.css`, and `assets/cookieBannerWide/banner.css`. Do not edit those
+`assets/cookieManager/manager.css`, `assets/cookieBannerWide/banner.css`, and `assets/backend/info.css`. Do not edit those
 generated files directly. Browser tests render the real component partials on an otherwise
 unstyled page and compare the original banner and manager against their existing mobile,
 tablet, and desktop screenshot references. They also check the wide banner, form interactions,

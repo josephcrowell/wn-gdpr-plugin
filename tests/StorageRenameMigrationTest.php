@@ -326,6 +326,18 @@ class StorageRenameMigrationTest extends TestCase
         }
     }
 
+    public function testRuntimeReplacementKeepsOnlyOfflineWhileComposerReplacesBothPackages(): void
+    {
+        $metadata = Yaml::parseFile(dirname(__DIR__) . '/plugin.yaml');
+        // UpdateManager refuses more than one runtime replacement. OFFLINE is
+        // the one required to preserve existing migration history and aliases.
+        $this->assertSame(['OFFLINE.GDPR' => '*'], $metadata['plugin']['replaces']);
+
+        $composer = json_decode(file_get_contents(dirname(__DIR__) . '/composer.json'), true, 512, JSON_THROW_ON_ERROR);
+        $this->assertSame('*', $composer['replace']['offline/oc-gdpr-plugin']);
+        $this->assertSame('*', $composer['replace']['hounddd/wn-gdprplus-plugin']);
+    }
+
     public function testFreshInstallationRunsHistoricalMigrationsBeforeRename(): void
     {
         $versions = Yaml::parseFile(dirname(__DIR__) . '/updates/version.yaml');

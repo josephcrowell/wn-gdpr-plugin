@@ -24,6 +24,9 @@ class Info extends Controller
         SettingsManager::setContext('JosephCrowell.GDPR', 'gdpr_info');
         $this->addCss('/plugins/josephcrowell/gdpr/assets/backend/styles.css');
 		$this->addCss('/plugins/josephcrowell/gdpr/assets/backend/prism.css');
+
+        // Follow the backend skin's light/dark/auto selection, without a new switch.
+        $this->addCss('/plugins/josephcrowell/gdpr/assets/backend/info.css');
 		$this->addJs('/plugins/josephcrowell/gdpr/assets/backend/prism.js');
     }
 

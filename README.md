@@ -152,8 +152,11 @@ storage compatibility and the wide banner's server-side consent handlers using i
 ### Wide cookie banner
 
 The GDPR Plus wide-banner functionality is included directly in `JosephCrowell.GDPR`. No
-separate `Hounddd.GdprPlus` or `OFFLINE.GDPR` installation is required. This plugin declares
-itself a replacement for those packages to avoid duplicate component registrations.
+separate `Hounddd.GdprPlus` or `OFFLINE.GDPR` installation is required. Composer declares
+both packages replaced, but Winter's runtime replacement map retains **only `OFFLINE.GDPR`**
+for legacy migrations and compatibility aliases: Winter does not support replacing multiple
+plugins at runtime. If the separate `Hounddd.GdprPlus` plugin is still installed, disable or
+remove that plugin before using the built-in wide banner to avoid duplicate component registrations.
 
 Use `cookieBannerWide` **instead of** `cookieBanner` in your layout, not alongside it:
 
